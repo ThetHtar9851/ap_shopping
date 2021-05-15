@@ -188,6 +188,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 User
               </p>
             </a>
+            <a href="order_list.php" class="nav-link">
+              <i class="nav-icon fa fa-table"></i>
+              <p>
+                Order
+              </p>
+            </a>
           </li>
         </ul>
       </nav>
