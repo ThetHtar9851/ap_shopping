@@ -12,12 +12,18 @@
   }
 
   if($_POST){
-    if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password']) || strlen($_POST['password']) < 4) {
+    if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['phone']) || empty($_POST['address']) || empty($_POST['password']) || strlen($_POST['password']) < 4) {
       if(empty($_POST['name'])) {
         $nameError = "Name is required";
       }
       if(empty($_POST['email'])) {
         $emailError = "Email is required";
+      }
+      if(empty($_POST['phone'])) {
+        $phoneError = "Phone is required";
+      }
+      if(empty($_POST['address'])) {
+        $addError = "Address is required";
       }
       if(empty($_POST['password'])) {
         $passwordError = "Password is required";
@@ -42,11 +48,13 @@
       if ($user) {
         echo "<script>alert('Email Duplicated');window.location.href='userAdd.php';</script>";
       }else {
-        $stat = $pdo->prepare("INSERT INTO users(name,email,password,role) VALUES(:name,:email,:password,:role)");
+        $stat = $pdo->prepare("INSERT INTO users(name,email,phone,address,password,role) VALUES(:name,:email,:password,:role)");
         $result = $stat->execute(
           array(
             ':name'=>$name,
             ':email'=>$email,
+            ':phone'=>$phone,
+            ':address'=>$address,
             ':password'=>$password,
             ':role'=>$role
           )
@@ -79,7 +87,17 @@
                   <div class="form-group">
                     <label for="">E-mail</label>
                     <p style="color:red";><?php echo empty($emailError) ? '' : '*'.$emailError; ?></p>
-                    <input type="email" class="form-control" name="email" value="">
+                    <input type="phone" class="form-control" name="phone" value="">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Phone</label>
+                    <p style="color:red";><?php echo empty($phoneError) ? '' : '*'.$phoneError; ?></p>
+                    <input type="text" class="form-control" name="phone" value="">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Address</label>
+                    <p style="color:red";><?php echo empty($addError) ? '' : '*'.$addError; ?></p>
+                    <input type="text" class="form-control" name="address" value="">
                   </div>
                   <div class="form-group">
                     <label for="">Password</label>
